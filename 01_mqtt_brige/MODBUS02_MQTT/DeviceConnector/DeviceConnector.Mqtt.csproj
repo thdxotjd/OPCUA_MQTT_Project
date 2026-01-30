@@ -1,0 +1,31 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net8.0</TargetFramework>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+    <RootNamespace>DeviceConnector</RootNamespace>
+    <AssemblyName>DeviceConnector.Mqtt</AssemblyName>
+    <Version>1.0.0</Version>
+    <Description>OPC UA to MQTT Bridge for MODBUS02_CODE</Description>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <!-- MQTT 클라이언트 라이브러리 -->
+    <PackageReference Include="MQTTnet" Version="4.3.7.1207" />
+    
+    <!-- JSON 직렬화 -->
+    <PackageReference Include="System.Text.Json" Version="8.0.5" />
+    
+    <!-- DI 지원 -->
+    <PackageReference Include="Microsoft.Extensions.DependencyInjection.Abstractions" Version="8.0.2" />
+  </ItemGroup>
+
+  <!-- 
+  실제 사용 시 MODBUS02_CODE 프로젝트 참조 추가:
+  <ItemGroup>
+    <ProjectReference Include="..\DeviceConnector\DeviceConnector.csproj" />
+  </ItemGroup>
+  -->
+
+</Project>
