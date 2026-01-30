@@ -1,0 +1,28 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net8.0</TargetFramework>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+    <GenerateDocumentationFile>true</GenerateDocumentationFile>
+    <Description>ESP32 ModbusTCP - KEPServerEX OPC UA Client Library with MQTT Bridge (v2.3)</Description>
+    <Version>2.3.0</Version>
+    <NoWarn>$(NoWarn);CS1591</NoWarn>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <!-- OPC UA SDK -->
+    <PackageReference Include="OPCFoundation.NetStandard.Opc.Ua.Client" Version="1.5.374.126" />
+    
+    <!-- MQTT Client -->
+    <PackageReference Include="MQTTnet" Version="4.3.7.1207" />
+    
+    <!-- JSON Serialization -->
+    <PackageReference Include="System.Text.Json" Version="8.0.5" />
+    
+    <!-- ASP.NET Core DI -->
+    <PackageReference Include="Microsoft.Extensions.DependencyInjection.Abstractions" Version="8.0.2" />
+    <PackageReference Include="Microsoft.Extensions.Logging.Abstractions" Version="8.0.2" />
+  </ItemGroup>
+
+</Project>
