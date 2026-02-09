@@ -1,0 +1,1311 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>DeviceConnector</name>
+    </assembly>
+    <members>
+        <member name="T:DeviceConnector.Events.DataChangedEventArgs">
+            <summary>
+            데이터 변경 이벤트 인자
+            </summary>
+        </member>
+        <member name="P:DeviceConnector.Events.DataChangedEventArgs.DeviceId">
+            <summary>디바이스 ID</summary>
+        </member>
+        <member name="P:DeviceConnector.Events.DataChangedEventArgs.Data">
+            <summary>변경된 데이터</summary>
+        </member>
+        <member name="P:DeviceConnector.Events.DataChangedEventArgs.Timestamp">
+            <summary>변경 시간</summary>
+        </member>
+        <member name="T:DeviceConnector.Events.ConnectionChangedEventArgs">
+            <summary>
+            연결 상태 변경 이벤트 인자
+            </summary>
+        </member>
+        <member name="P:DeviceConnector.Events.ConnectionChangedEventArgs.Status">
+            <summary>현재 연결 상태</summary>
+        </member>
+        <member name="P:DeviceConnector.Events.ConnectionChangedEventArgs.PreviousState">
+            <summary>이전 연결 상태</summary>
+        </member>
+        <member name="P:DeviceConnector.Events.ConnectionChangedEventArgs.Timestamp">
+            <summary>변경 시간</summary>
+        </member>
+        <member name="T:DeviceConnector.Events.WriteCompletedEventArgs">
+            <summary>
+            Write 완료 이벤트 인자
+            </summary>
+        </member>
+        <member name="P:DeviceConnector.Events.WriteCompletedEventArgs.DeviceId">
+            <summary>디바이스 ID</summary>
+        </member>
+        <member name="P:DeviceConnector.Events.WriteCompletedEventArgs.TagName">
+            <summary>태그 이름</summary>
+        </member>
+        <member name="P:DeviceConnector.Events.WriteCompletedEventArgs.Value">
+            <summary>쓰기 값</summary>
+        </member>
+        <member name="P:DeviceConnector.Events.WriteCompletedEventArgs.Success">
+            <summary>성공 여부</summary>
+        </member>
+        <member name="P:DeviceConnector.Events.WriteCompletedEventArgs.ErrorMessage">
+            <summary>에러 메시지 (실패 시)</summary>
+        </member>
+        <member name="P:DeviceConnector.Events.WriteCompletedEventArgs.Timestamp">
+            <summary>완료 시간</summary>
+        </member>
+        <member name="T:DeviceConnector.Events.ErrorOccurredEventArgs">
+            <summary>
+            에러 발생 이벤트 인자
+            </summary>
+        </member>
+        <member name="P:DeviceConnector.Events.ErrorOccurredEventArgs.Message">
+            <summary>에러 메시지</summary>
+        </member>
+        <member name="P:DeviceConnector.Events.ErrorOccurredEventArgs.Exception">
+            <summary>예외 객체</summary>
+        </member>
+        <member name="P:DeviceConnector.Events.ErrorOccurredEventArgs.Timestamp">
+            <summary>발생 시간</summary>
+        </member>
+        <member name="T:DeviceConnector.Extensions.ServiceCollectionExtensions">
+            <summary>
+            DI 컨테이너 확장 메서드
+            </summary>
+        </member>
+        <member name="M:DeviceConnector.Extensions.ServiceCollectionExtensions.AddDeviceConnector(Microsoft.Extensions.DependencyInjection.IServiceCollection,DeviceConnector.Models.OpcUaConnectionInfo)">
+            <summary>
+            DeviceConnector 서비스 등록
+            </summary>
+        </member>
+        <member name="M:DeviceConnector.Extensions.ServiceCollectionExtensions.AddDeviceConnector(Microsoft.Extensions.DependencyInjection.IServiceCollection,System.Action{DeviceConnector.Models.OpcUaConnectionInfo})">
+            <summary>
+            DeviceConnector 서비스 등록 (설정 액션)
+            </summary>
+        </member>
+        <member name="M:DeviceConnector.Extensions.ServiceCollectionExtensions.AddMqttPublisher(Microsoft.Extensions.DependencyInjection.IServiceCollection,DeviceConnector.Mqtt.Models.MqttConnectionInfo,DeviceConnector.Mqtt.Models.MqttTopicConfig)">
+            <summary>
+            MQTT 퍼블리셔 서비스 등록
+            </summary>
+        </member>
+        <member name="M:DeviceConnector.Extensions.ServiceCollectionExtensions.AddMqttPublisher(Microsoft.Extensions.DependencyInjection.IServiceCollection,System.Action{DeviceConnector.Mqtt.Models.MqttConnectionInfo},System.Action{DeviceConnector.Mqtt.Models.MqttTopicConfig})">
+            <summary>
+            MQTT 퍼블리셔 서비스 등록 (설정 액션)
+            </summary>
+        </member>
+        <member name="M:DeviceConnector.Extensions.ServiceCollectionExtensions.AddUnifiedOpcUaMqttBridge(Microsoft.Extensions.DependencyInjection.IServiceCollection,DeviceConnector.Mqtt.Models.UnifiedMqttTopicConfig)">
+            <summary>
+            통합 OPC UA - MQTT 브릿지 서비스 등록
+            </summary>
+        </member>
+        <member name="M:DeviceConnector.Extensions.ServiceCollectionExtensions.AddFullBridgeStack(Microsoft.Extensions.DependencyInjection.IServiceCollection,DeviceConnector.Models.OpcUaConnectionInfo,DeviceConnector.Mqtt.Models.MqttConnectionInfo,DeviceConnector.Mqtt.Models.UnifiedMqttTopicConfig)">
+            <summary>
+            전체 브릿지 스택 등록 (OPC UA + MQTT + Bridge)
+            </summary>
+        </member>
+        <member name="T:DeviceConnector.Interfaces.IOpcUaClientService">
+            <summary>
+            OPC UA 클라이언트 서비스 인터페이스
+            gRPC 개발자가 사용할 계약
+            </summary>
+        </member>
+        <member name="E:DeviceConnector.Interfaces.IOpcUaClientService.DataChanged">
+            <summary>데이터 변경 시 발생 (Subscription)</summary>
+        </member>
+        <member name="E:DeviceConnector.Interfaces.IOpcUaClientService.ConnectionChanged">
+            <summary>연결 상태 변경 시 발생</summary>
+        </member>
+        <member name="E:DeviceConnector.Interfaces.IOpcUaClientService.WriteCompleted">
+            <summary>Write 완료 시 발생</summary>
+        </member>
+        <member name="E:DeviceConnector.Interfaces.IOpcUaClientService.ErrorOccurred">
+            <summary>에러 발생 시</summary>
+        </member>
+        <member name="P:DeviceConnector.Interfaces.IOpcUaClientService.Status">
+            <summary>연결 상태</summary>
+        </member>
+        <member name="P:DeviceConnector.Interfaces.IOpcUaClientService.IsConnected">
+            <summary>연결 여부</summary>
+        </member>
+        <member name="M:DeviceConnector.Interfaces.IOpcUaClientService.ConnectAsync(System.Threading.CancellationToken)">
+            <summary>OPC UA 서버에 연결</summary>
+        </member>
+        <member name="M:DeviceConnector.Interfaces.IOpcUaClientService.DisconnectAsync">
+            <summary>OPC UA 서버 연결 해제</summary>
+        </member>
+        <member name="M:DeviceConnector.Interfaces.IOpcUaClientService.AddDeviceConfig(DeviceConnector.Models.DeviceTagConfig)">
+            <summary>디바이스 설정 추가</summary>
+        </member>
+        <member name="M:DeviceConnector.Interfaces.IOpcUaClientService.RemoveDeviceConfig(System.String)">
+            <summary>디바이스 설정 제거</summary>
+        </member>
+        <member name="M:DeviceConnector.Interfaces.IOpcUaClientService.GetRegisteredDevices">
+            <summary>등록된 디바이스 목록 조회</summary>
+        </member>
+        <member name="M:DeviceConnector.Interfaces.IOpcUaClientService.ReadDeviceDataAsync(System.String,System.Threading.CancellationToken)">
+            <summary>특정 디바이스의 ESP32 데이터 읽기</summary>
+        </member>
+        <member name="M:DeviceConnector.Interfaces.IOpcUaClientService.ReadAllDevicesDataAsync(System.Threading.CancellationToken)">
+            <summary>모든 디바이스의 ESP32 데이터 읽기</summary>
+        </member>
+        <member name="M:DeviceConnector.Interfaces.IOpcUaClientService.WriteTargetAAsync(System.String,System.Boolean,System.Threading.CancellationToken)">
+            <summary>
+            TargetA 태그에 Boolean 값 쓰기
+            ※ v2.2: Coil 주소(00007) 사용 - FC05 Write Single Coil
+            </summary>
+        </member>
+        <member name="M:DeviceConnector.Interfaces.IOpcUaClientService.WriteControlAsync(System.String,System.String,System.Threading.CancellationToken)">
+            <summary>Control 태그에 문자열 쓰기</summary>
+        </member>
+        <member name="M:DeviceConnector.Interfaces.IOpcUaClientService.WriteStateAsync(System.String,System.String,System.Threading.CancellationToken)">
+            <summary>State 태그에 문자열 쓰기</summary>
+        </member>
+        <member name="M:DeviceConnector.Interfaces.IOpcUaClientService.WriteTagAsync(System.String,System.String,System.Object,System.Threading.CancellationToken)">
+            <summary>특정 태그에 값 쓰기 (범용)</summary>
+        </member>
+        <member name="M:DeviceConnector.Interfaces.IOpcUaClientService.StartSubscriptionAsync(System.String,System.Threading.CancellationToken)">
+            <summary>특정 디바이스 데이터 구독 시작</summary>
+        </member>
+        <member name="M:DeviceConnector.Interfaces.IOpcUaClientService.StopSubscriptionAsync(System.String)">
+            <summary>특정 디바이스 구독 중지</summary>
+        </member>
+        <member name="M:DeviceConnector.Interfaces.IOpcUaClientService.StartAllSubscriptionsAsync(System.Threading.CancellationToken)">
+            <summary>모든 디바이스 구독 시작</summary>
+        </member>
+        <member name="M:DeviceConnector.Interfaces.IOpcUaClientService.StopAllSubscriptionsAsync">
+            <summary>모든 구독 중지</summary>
+        </member>
+        <member name="T:DeviceConnector.Models.ConnectionStatus">
+            <summary>
+            OPC UA 연결 상태 정보
+            </summary>
+        </member>
+        <member name="P:DeviceConnector.Models.ConnectionStatus.State">
+            <summary>연결 상태</summary>
+        </member>
+        <member name="P:DeviceConnector.Models.ConnectionStatus.ServerUrl">
+            <summary>서버 URL</summary>
+        </member>
+        <member name="P:DeviceConnector.Models.ConnectionStatus.LastConnectedTime">
+            <summary>마지막 연결 성공 시간</summary>
+        </member>
+        <member name="P:DeviceConnector.Models.ConnectionStatus.ReconnectAttempts">
+            <summary>재연결 시도 횟수</summary>
+        </member>
+        <member name="P:DeviceConnector.Models.ConnectionStatus.LastError">
+            <summary>마지막 에러 메시지</summary>
+        </member>
+        <member name="P:DeviceConnector.Models.ConnectionStatus.IsConnected">
+            <summary>연결 여부</summary>
+        </member>
+        <member name="T:DeviceConnector.Models.ConnectionState">
+            <summary>
+            연결 상태 열거형
+            </summary>
+        </member>
+        <member name="F:DeviceConnector.Models.ConnectionState.Disconnected">
+            <summary>연결 끊김</summary>
+        </member>
+        <member name="F:DeviceConnector.Models.ConnectionState.Connecting">
+            <summary>연결 시도 중</summary>
+        </member>
+        <member name="F:DeviceConnector.Models.ConnectionState.Connected">
+            <summary>연결됨</summary>
+        </member>
+        <member name="F:DeviceConnector.Models.ConnectionState.Reconnecting">
+            <summary>재연결 시도 중</summary>
+        </member>
+        <member name="F:DeviceConnector.Models.ConnectionState.Error">
+            <summary>에러 발생</summary>
+        </member>
+        <member name="T:DeviceConnector.Models.ESP32Data">
+            <summary>
+            ESP32 디바이스 데이터 모델
+            KEPServerEX ModbusTCP 태그 매핑
+            
+            ┌─────────────────────────────────────────────────────────────┐
+            │ 태그 구성 (v2.2 - TargetA Coil 주소 변경)                   │
+            ├─────────────┬──────────┬───────────┬───────────────────────┤
+            │ Tag Name    │ Address  │ Data Type │ 방향                  │
+            ├─────────────┼──────────┼───────────┼───────────────────────┤
+            │ POS_X       │ 40001    │ Float     │ Read (ESP32 → OPC)    │
+            │ POS_Y       │ 40003    │ Float     │ Read (ESP32 → OPC)    │
+            │ POS_T       │ 40005    │ Float     │ Read (ESP32 → OPC)    │
+            │ TargetA     │ 00007    │ Boolean   │ Write (OPC → ESP32)   │  ← Coil 주소
+            │ Control     │ 40100.20H│ String    │ Write (OPC → ESP32)   │
+            │ State       │ 40200.20H│ String    │ Write (OPC → ESP32)   │
+            └─────────────┴──────────┴───────────┴───────────────────────┘
+            </summary>
+        </member>
+        <member name="P:DeviceConnector.Models.ESP32Data.DeviceId">
+            <summary>디바이스 ID (예: "ESP32_01")</summary>
+        </member>
+        <member name="P:DeviceConnector.Models.ESP32Data.ChannelName">
+            <summary>KEPServerEX 채널명 (예: "ModbusTCP")</summary>
+        </member>
+        <member name="P:DeviceConnector.Models.ESP32Data.DeviceName">
+            <summary>KEPServerEX 디바이스명 (예: "ESP32_01")</summary>
+        </member>
+        <member name="P:DeviceConnector.Models.ESP32Data.PosX">
+            <summary>X 좌표 (m) - Modbus 40001-40002 (Float)</summary>
+        </member>
+        <member name="P:DeviceConnector.Models.ESP32Data.PosY">
+            <summary>Y 좌표 (m) - Modbus 40003-40004 (Float)</summary>
+        </member>
+        <member name="P:DeviceConnector.Models.ESP32Data.PosTheta">
+            <summary>각도 Theta (rad) - Modbus 40005-40006 (Float)</summary>
+        </member>
+        <member name="P:DeviceConnector.Models.ESP32Data.TargetA">
+            <summary>
+            목표 A 플래그 - Modbus Coil 00007 (Boolean)
+            ※ v2.2 변경: Holding Register 비트(40007.0) → Coil(00007)
+            Function Code: FC05 (Write Single Coil)
+            </summary>
+        </member>
+        <member name="P:DeviceConnector.Models.ESP32Data.Control">
+            <summary>제어 명령 - Modbus 40100.20H (String, 20자)</summary>
+        </member>
+        <member name="P:DeviceConnector.Models.ESP32Data.State">
+            <summary>상태 정보 - Modbus 40200.20H (String, 20자)</summary>
+        </member>
+        <member name="P:DeviceConnector.Models.ESP32Data.Timestamp">
+            <summary>데이터 갱신 시간 (UTC)</summary>
+        </member>
+        <member name="P:DeviceConnector.Models.ESP32Data.IsGoodQuality">
+            <summary>OPC UA Quality 상태 (Good=true)</summary>
+        </member>
+        <member name="M:DeviceConnector.Models.ESP32Data.Clone">
+            <summary>객체 복제</summary>
+        </member>
+        <member name="T:DeviceConnector.Models.OpcUaConnectionInfo">
+            <summary>
+            OPC UA 연결 설정 정보
+            </summary>
+        </member>
+        <member name="P:DeviceConnector.Models.OpcUaConnectionInfo.EndpointUrl">
+            <summary>OPC UA 서버 엔드포인트 URL</summary>
+            <example>opc.tcp://127.0.0.1:49320</example>
+        </member>
+        <member name="P:DeviceConnector.Models.OpcUaConnectionInfo.ApplicationName">
+            <summary>애플리케이션 이름</summary>
+        </member>
+        <member name="P:DeviceConnector.Models.OpcUaConnectionInfo.SecurityPolicy">
+            <summary>보안 정책 (None, Basic256Sha256 등)</summary>
+        </member>
+        <member name="P:DeviceConnector.Models.OpcUaConnectionInfo.AutoReconnect">
+            <summary>자동 재연결 여부</summary>
+        </member>
+        <member name="P:DeviceConnector.Models.OpcUaConnectionInfo.ReconnectInterval">
+            <summary>재연결 간격 (ms)</summary>
+        </member>
+        <member name="P:DeviceConnector.Models.OpcUaConnectionInfo.ConnectionTimeout">
+            <summary>연결 타임아웃 (ms)</summary>
+        </member>
+        <member name="P:DeviceConnector.Models.OpcUaConnectionInfo.SessionTimeout">
+            <summary>세션 타임아웃 (ms)</summary>
+        </member>
+        <member name="P:DeviceConnector.Models.OpcUaConnectionInfo.PublishingInterval">
+            <summary>Subscription 발행 간격 (ms)</summary>
+        </member>
+        <member name="P:DeviceConnector.Models.OpcUaConnectionInfo.SamplingInterval">
+            <summary>MonitoredItem 샘플링 간격 (ms)</summary>
+        </member>
+        <member name="P:DeviceConnector.Models.OpcUaConnectionInfo.Username">
+            <summary>사용자 이름 (인증 필요 시)</summary>
+        </member>
+        <member name="P:DeviceConnector.Models.OpcUaConnectionInfo.Password">
+            <summary>비밀번호 (인증 필요 시)</summary>
+        </member>
+        <member name="T:DeviceConnector.Models.DeviceTagConfig">
+            <summary>
+            디바이스별 태그 설정
+            KEPServerEX NodeId 형식: ns=2;s=ChannelName.DeviceName.TagName
+            </summary>
+        </member>
+        <member name="P:DeviceConnector.Models.DeviceTagConfig.DeviceId">
+            <summary>디바이스 식별자 (예: "ESP32_01")</summary>
+        </member>
+        <member name="P:DeviceConnector.Models.DeviceTagConfig.ChannelName">
+            <summary>KEPServerEX 채널명 (예: "ModbusTCP")</summary>
+        </member>
+        <member name="P:DeviceConnector.Models.DeviceTagConfig.DeviceName">
+            <summary>KEPServerEX 디바이스명 (예: "ESP32_01")</summary>
+        </member>
+        <member name="P:DeviceConnector.Models.DeviceTagConfig.Tags">
+            <summary>태그 이름 목록</summary>
+        </member>
+        <member name="M:DeviceConnector.Models.DeviceTagConfig.GetNodeId(System.String)">
+            <summary>
+            NodeId 생성
+            </summary>
+            <param name="tagName">태그 이름</param>
+            <returns>OPC UA NodeId 문자열</returns>
+        </member>
+        <member name="T:DeviceConnector.Models.DeviceTagNames">
+            <summary>
+            ESP32 태그 이름 정의 (KEPServerEX 태그와 매핑)
+            
+            ┌─────────────────────────────────────────────────────────────────────┐
+            │ v2.2 변경사항: TargetA 주소 변경                                    │
+            │ - 이전: 40007.0 (Holding Register Bit) - Write 실패 문제           │
+            │ - 변경: 00007 (Coil) - FC05 Write Single Coil 사용                 │
+            └─────────────────────────────────────────────────────────────────────┘
+            </summary>
+        </member>
+        <member name="P:DeviceConnector.Models.DeviceTagNames.PosX">
+            <summary>X 좌표 태그 - Address: 40001, Type: Float</summary>
+        </member>
+        <member name="P:DeviceConnector.Models.DeviceTagNames.PosY">
+            <summary>Y 좌표 태그 - Address: 40003, Type: Float</summary>
+        </member>
+        <member name="P:DeviceConnector.Models.DeviceTagNames.PosTheta">
+            <summary>각도 태그 - Address: 40005, Type: Float</summary>
+        </member>
+        <member name="P:DeviceConnector.Models.DeviceTagNames.TargetA">
+            <summary>
+            목표 A 플래그 태그 - Address: 00007 (Coil), Type: Boolean
+            ※ v2.2: Coil 주소로 변경 (FC05 Write Single Coil)
+            </summary>
+        </member>
+        <member name="P:DeviceConnector.Models.DeviceTagNames.Control">
+            <summary>제어 명령 태그 - Address: 40100.20H, Type: String</summary>
+        </member>
+        <member name="P:DeviceConnector.Models.DeviceTagNames.State">
+            <summary>상태 정보 태그 - Address: 40200.20H, Type: String</summary>
+        </member>
+        <member name="T:DeviceConnector.Models.ESP32Tags">
+            <summary>
+            ESP32 태그 이름 상수 (gRPC 개발자용)
+            </summary>
+        </member>
+        <member name="T:DeviceConnector.Models.ModbusAddresses">
+            <summary>
+            KEPServerEX Modbus 주소 상수 (참고용)
+            </summary>
+        </member>
+        <member name="F:DeviceConnector.Models.ModbusAddresses.TARGET_A">
+            <summary>
+            TargetA - Coil 주소 (v2.2 변경)
+            FC05: Write Single Coil
+            </summary>
+        </member>
+        <member name="T:DeviceConnector.Models.SimulatorData">
+            <summary>
+            Simulator 디바이스 데이터 모델
+            KEPServerEX 8-Bit Simulator 태그 매핑
+            
+            ┌──────────────────────────────────────────────────────────────────────────┐
+            │ 태그 구성 (KEPServerEX 8-Bit Simulator)                                  │
+            │ OPC UA NodeId 형식: ns=2;s=ChannelName.DeviceName.TagGroup.TagName       │
+            │ 예: ns=2;s=MqttTest.SimDevice01.Monitoring.Temperature                   │
+            ├───────────────────┬─────────────────────────────────────┬───────────┬────┤
+            │ Tag Name          │ Address                             │ Data Type │방향│
+            ├───────────────────┼─────────────────────────────────────┼───────────┼────┤
+            │ Monitoring Group                                                         │
+            ├───────────────────┼─────────────────────────────────────┼───────────┼────┤
+            │ Temperature       │ RAMP(1000, 0, 100, 1)               │ Float     │Read│
+            │ Pressure          │ RANDOM(1000, 10, 50)                │ Float     │Read│
+            │ MotorRPM          │ SINE(100, 200, 800, 0.05)           │ Float     │Read│
+            ├───────────────────┼─────────────────────────────────────┼───────────┼────┤
+            │ Control Group                                                            │
+            ├───────────────────┼─────────────────────────────────────┼───────────┼────┤
+            │ MotorStart        │ R00100.0                            │ Boolean   │R/W │
+            │ MotorStop         │ R00100.1                            │ Boolean   │R/W │
+            │ SpeedSetpoint     │ R00200                              │ Word      │R/W │
+            │ ModeSelect        │ R00202                              │ Word      │R/W │
+            ├───────────────────┼─────────────────────────────────────┼───────────┼────┤
+            │ Status Group                                                             │
+            ├───────────────────┼─────────────────────────────────────┼───────────┼────┤
+            │ Alarm01           │ R00300.0                            │ Boolean   │R/W │
+            │ Alarm02           │ R00300.1                            │ Boolean   │R/W │
+            │ RunningFlag       │ R00300.2                            │ Boolean   │R/W │
+            └───────────────────┴─────────────────────────────────────┴───────────┴────┘
+            </summary>
+        </member>
+        <member name="P:DeviceConnector.Models.SimulatorData.DeviceId">
+            <summary>디바이스 ID (예: "SimDevice01")</summary>
+        </member>
+        <member name="P:DeviceConnector.Models.SimulatorData.ChannelName">
+            <summary>KEPServerEX 채널명 (예: "MqttTest")</summary>
+        </member>
+        <member name="P:DeviceConnector.Models.SimulatorData.DeviceName">
+            <summary>KEPServerEX 디바이스명 (예: "SimDevice01")</summary>
+        </member>
+        <member name="P:DeviceConnector.Models.SimulatorData.Temperature">
+            <summary>온도 - RAMP(1000, 0, 100, 1)</summary>
+        </member>
+        <member name="P:DeviceConnector.Models.SimulatorData.Pressure">
+            <summary>압력 - RANDOM(1000, 10, 50)</summary>
+        </member>
+        <member name="P:DeviceConnector.Models.SimulatorData.MotorRPM">
+            <summary>모터 RPM - SINE(100, 200, 800, 0.05)</summary>
+        </member>
+        <member name="P:DeviceConnector.Models.SimulatorData.MotorStart">
+            <summary>모터 시작 - R00100.0</summary>
+        </member>
+        <member name="P:DeviceConnector.Models.SimulatorData.MotorStop">
+            <summary>모터 정지 - R00100.1</summary>
+        </member>
+        <member name="P:DeviceConnector.Models.SimulatorData.SpeedSetpoint">
+            <summary>속도 설정값 - R00200</summary>
+        </member>
+        <member name="P:DeviceConnector.Models.SimulatorData.ModeSelect">
+            <summary>모드 선택 - R00202</summary>
+        </member>
+        <member name="P:DeviceConnector.Models.SimulatorData.Alarm01">
+            <summary>알람 1 - R00300.0</summary>
+        </member>
+        <member name="P:DeviceConnector.Models.SimulatorData.Alarm02">
+            <summary>알람 2 - R00300.1</summary>
+        </member>
+        <member name="P:DeviceConnector.Models.SimulatorData.RunningFlag">
+            <summary>운전 상태 플래그 - R00300.2</summary>
+        </member>
+        <member name="P:DeviceConnector.Models.SimulatorData.Timestamp">
+            <summary>데이터 갱신 시간 (UTC)</summary>
+        </member>
+        <member name="P:DeviceConnector.Models.SimulatorData.IsGoodQuality">
+            <summary>OPC UA Quality 상태 (Good=true)</summary>
+        </member>
+        <member name="M:DeviceConnector.Models.SimulatorData.Clone">
+            <summary>객체 복제</summary>
+        </member>
+        <member name="T:DeviceConnector.Models.SimulatorTagNames">
+            <summary>
+            Simulator 태그 이름 정의
+            </summary>
+        </member>
+        <member name="T:DeviceConnector.Models.SimulatorTagConfig">
+            <summary>
+            Simulator 디바이스 태그 설정
+            KEPServerEX Item ID 형식: ChannelName.DeviceName.TagGroup.TagName
+            </summary>
+        </member>
+        <member name="P:DeviceConnector.Models.SimulatorTagConfig.DeviceId">
+            <summary>디바이스 식별자</summary>
+        </member>
+        <member name="P:DeviceConnector.Models.SimulatorTagConfig.ChannelName">
+            <summary>KEPServerEX 채널명</summary>
+        </member>
+        <member name="P:DeviceConnector.Models.SimulatorTagConfig.DeviceName">
+            <summary>KEPServerEX 디바이스명</summary>
+        </member>
+        <member name="P:DeviceConnector.Models.SimulatorTagConfig.Tags">
+            <summary>태그 이름 설정</summary>
+        </member>
+        <member name="P:DeviceConnector.Models.SimulatorTagConfig.NamespaceIndex">
+            <summary>OPC UA 네임스페이스 인덱스</summary>
+        </member>
+        <member name="M:DeviceConnector.Models.SimulatorTagConfig.GetNodeId(System.String,System.String)">
+            <summary>
+            태그명으로 NodeId 생성 (태그 그룹 포함)
+            KEPServerEX 형식: ns=2;s=ChannelName.DeviceName.TagGroup.TagName
+            예: ns=2;s=MqttTest.SimDevice01.Monitoring.Temperature
+            </summary>
+        </member>
+        <member name="T:DeviceConnector.Models.SimulatorTagConfig.TagGroups">
+            <summary>
+            태그 그룹 정의
+            </summary>
+        </member>
+        <member name="T:DeviceConnector.Models.STMYoloData">
+            <summary>
+            STM_yolo 디바이스 데이터 모델
+            KEPServerEX OPC UA NodeId 형식: ns=2;s=ChannelName.DeviceName.TagName
+            예: ns=2;s=STM.Stm_yolo.TargetState
+            
+            ┌──────────────────────────────────────────────────────────────────────────┐
+            │ 태그 구성 (KEPServerEX OPC UA)                                           │
+            ├───────────────────┬─────────────────────────────────┬───────────┬────────┤
+            │ Tag Name          │ NodeId                          │ Data Type │ 방향   │
+            ├───────────────────┼─────────────────────────────────┼───────────┼────────┤
+            │ TargetState       │ ns=2;s=STM.Stm_yolo.TargetState │ LLong     │ Write  │
+            │ TargetSpeedMain   │ ns=2;s=STM.Stm_yolo.TargetSpeedMain │ LLong │ Write  │
+            │ TargetSpeedSort   │ ns=2;s=STM.Stm_yolo.TargetSpeedSort │ LLong │ Write  │
+            │ TargetSpeedLoad   │ ns=2;s=STM.Stm_yolo.TargetSpeedLoad │ LLong │ Write  │
+            │ AgvSortArrived    │ ns=2;s=STM.Stm_yolo.AgvSortArrived  │ Boolean│ Write  │
+            │ AgvSortDeparted   │ ns=2;s=STM.Stm_yolo.AgvSortDeparted │ Boolean│ Write  │
+            │ AgvLoadArrived    │ ns=2;s=STM.Stm_yolo.AgvLoadArrived  │ Boolean│ Write  │
+            │ AgvLoadDeparted   │ ns=2;s=STM.Stm_yolo.AgvLoadDeparted │ Boolean│ Write  │
+            │ CurrentState      │ ns=2;s=STM.Stm_yolo.CurrentState    │ LLong  │ Read   │
+            │ CurrentSpeedMain  │ ns=2;s=STM.Stm_yolo.CurrentSpeedMain│ LLong  │ Read   │
+            │ CurrentSpeedSort  │ ns=2;s=STM.Stm_yolo.CurrentSpeedSort│ LLong  │ Read   │
+            │ CurrentSpeedLoad  │ ns=2;s=STM.Stm_yolo.CurrentSpeedLoad│ LLong  │ Read   │
+            │ CurrentFloor      │ ns=2;s=STM.Stm_yolo.CurrentFloor    │ LLong  │ Read   │
+            │ IsLiftMoving      │ ns=2;s=STM.Stm_yolo.IsLiftMoving    │ Boolean│ Read   │
+            │ IsRobotWorking    │ ns=2;s=STM.Stm_yolo.IsRobotWorking  │ Boolean│ Read   │
+            │ IsRobotDone       │ ns=2;s=STM.Stm_yolo.IsRobotDone     │ Boolean│ Read   │
+            └───────────────────┴─────────────────────────────────┴───────────┴────────┘
+            </summary>
+        </member>
+        <member name="P:DeviceConnector.Models.STMYoloData.DeviceId">
+            <summary>디바이스 ID (예: "STM_yolo")</summary>
+        </member>
+        <member name="P:DeviceConnector.Models.STMYoloData.ChannelName">
+            <summary>KEPServerEX 채널명 (예: "Channel1_opcua")</summary>
+        </member>
+        <member name="P:DeviceConnector.Models.STMYoloData.DeviceName">
+            <summary>KEPServerEX 디바이스명 (예: "STM")</summary>
+        </member>
+        <member name="P:DeviceConnector.Models.STMYoloData.TargetState">
+            <summary>목표 상태 - ns=2;i=40001 (LLong)</summary>
+        </member>
+        <member name="P:DeviceConnector.Models.STMYoloData.TargetSpeedMain">
+            <summary>목표 메인 컨베이어 속도 - ns=2;i=40002 (LLong)</summary>
+        </member>
+        <member name="P:DeviceConnector.Models.STMYoloData.TargetSpeedSort">
+            <summary>목표 분류 컨베이어 속도 - ns=2;i=40003 (LLong)</summary>
+        </member>
+        <member name="P:DeviceConnector.Models.STMYoloData.TargetSpeedLoad">
+            <summary>목표 적재 컨베이어 속도 - ns=2;i=40004 (LLong)</summary>
+        </member>
+        <member name="P:DeviceConnector.Models.STMYoloData.AgvSortArrived">
+            <summary>AGV 분류 도착 플래그 - ns=2;i=40005 (Boolean)</summary>
+        </member>
+        <member name="P:DeviceConnector.Models.STMYoloData.AgvSortDeparted">
+            <summary>AGV 분류 출발 플래그 - ns=2;i=40006 (Boolean)</summary>
+        </member>
+        <member name="P:DeviceConnector.Models.STMYoloData.AgvLoadArrived">
+            <summary>AGV 적재 도착 플래그 - ns=2;i=40007 (Boolean)</summary>
+        </member>
+        <member name="P:DeviceConnector.Models.STMYoloData.AgvLoadDeparted">
+            <summary>AGV 적재 출발 플래그 - ns=2;i=40008 (Boolean)</summary>
+        </member>
+        <member name="P:DeviceConnector.Models.STMYoloData.CurrentState">
+            <summary>현재 상태 - ns=2;i=50001 (LLong)</summary>
+        </member>
+        <member name="P:DeviceConnector.Models.STMYoloData.CurrentSpeedMain">
+            <summary>현재 메인 컨베이어 속도 - ns=2;i=50002 (LLong)</summary>
+        </member>
+        <member name="P:DeviceConnector.Models.STMYoloData.CurrentSpeedSort">
+            <summary>현재 분류 컨베이어 속도 - ns=2;i=50003 (LLong)</summary>
+        </member>
+        <member name="P:DeviceConnector.Models.STMYoloData.CurrentSpeedLoad">
+            <summary>현재 적재 컨베이어 속도 - ns=2;i=50004 (LLong)</summary>
+        </member>
+        <member name="P:DeviceConnector.Models.STMYoloData.CurrentFloor">
+            <summary>현재 층 - ns=2;i=50005 (LLong)</summary>
+        </member>
+        <member name="P:DeviceConnector.Models.STMYoloData.IsLiftMoving">
+            <summary>리프트 동작 중 - ns=2;i=50006 (Boolean)</summary>
+        </member>
+        <member name="P:DeviceConnector.Models.STMYoloData.IsRobotWorking">
+            <summary>로봇 작업 중 - ns=2;i=50007 (Boolean)</summary>
+        </member>
+        <member name="P:DeviceConnector.Models.STMYoloData.IsRobotDone">
+            <summary>로봇 작업 완료 - ns=2;i=50008 (Boolean)</summary>
+        </member>
+        <member name="P:DeviceConnector.Models.STMYoloData.Timestamp">
+            <summary>데이터 갱신 시간 (UTC)</summary>
+        </member>
+        <member name="P:DeviceConnector.Models.STMYoloData.IsGoodQuality">
+            <summary>OPC UA Quality 상태 (Good=true)</summary>
+        </member>
+        <member name="M:DeviceConnector.Models.STMYoloData.Clone">
+            <summary>객체 복제</summary>
+        </member>
+        <member name="T:DeviceConnector.Models.STMYoloTagNames">
+            <summary>
+            STM_yolo 태그 이름 정의
+            </summary>
+        </member>
+        <member name="T:DeviceConnector.Models.STMYoloTagConfig">
+            <summary>
+            STM_yolo 디바이스 태그 설정
+            KEPServerEX Item ID 형식: ChannelName.DeviceName.TagName
+            </summary>
+        </member>
+        <member name="P:DeviceConnector.Models.STMYoloTagConfig.DeviceId">
+            <summary>디바이스 식별자</summary>
+        </member>
+        <member name="P:DeviceConnector.Models.STMYoloTagConfig.ChannelName">
+            <summary>KEPServerEX 채널명</summary>
+        </member>
+        <member name="P:DeviceConnector.Models.STMYoloTagConfig.DeviceName">
+            <summary>KEPServerEX 디바이스명</summary>
+        </member>
+        <member name="P:DeviceConnector.Models.STMYoloTagConfig.Tags">
+            <summary>태그 이름 설정</summary>
+        </member>
+        <member name="P:DeviceConnector.Models.STMYoloTagConfig.NamespaceIndex">
+            <summary>OPC UA 네임스페이스 인덱스</summary>
+        </member>
+        <member name="M:DeviceConnector.Models.STMYoloTagConfig.GetNodeId(System.String)">
+            <summary>
+            태그명으로 NodeId 생성
+            KEPServerEX 형식: ns=2;s=ChannelName.DeviceName.TagName
+            예: ns=2;s=STM.Stm_yolo.TargetState
+            </summary>
+        </member>
+        <member name="T:DeviceConnector.Models.STMYoloTagConfig.TagNames">
+            <summary>
+            태그별 NodeId 매핑 (문자열 기반)
+            </summary>
+        </member>
+        <member name="T:DeviceConnector.Models.IDeviceData">
+            <summary>
+            통합 디바이스 데이터 래퍼
+            여러 디바이스 타입을 하나의 인터페이스로 처리
+            </summary>
+        </member>
+        <member name="T:DeviceConnector.Models.DeviceType">
+            <summary>
+            디바이스 타입 열거형
+            </summary>
+        </member>
+        <member name="F:DeviceConnector.Models.DeviceType.ESP32">
+            <summary>ESP32 ModbusTCP 디바이스</summary>
+        </member>
+        <member name="F:DeviceConnector.Models.DeviceType.STMYolo">
+            <summary>STM Yolo 디바이스</summary>
+        </member>
+        <member name="F:DeviceConnector.Models.DeviceType.Simulator">
+            <summary>KEPServerEX Simulator 디바이스</summary>
+        </member>
+        <member name="T:DeviceConnector.Models.IDeviceTagConfig">
+            <summary>
+            통합 디바이스 설정 인터페이스
+            </summary>
+        </member>
+        <member name="T:DeviceConnector.Models.UnifiedDeviceConfig">
+            <summary>
+            통합 디바이스 설정 (모든 디바이스 타입 지원)
+            </summary>
+        </member>
+        <member name="P:DeviceConnector.Models.UnifiedDeviceConfig.UseTagGroups">
+            <summary>태그 그룹 사용 여부 (Simulator는 그룹 사용)</summary>
+        </member>
+        <member name="P:DeviceConnector.Models.UnifiedDeviceConfig.Tags">
+            <summary>태그 정의 (TagName -> TagGroup 또는 빈 문자열)</summary>
+        </member>
+        <member name="T:DeviceConnector.Models.TagDefinition">
+            <summary>
+            태그 정의
+            </summary>
+        </member>
+        <member name="T:DeviceConnector.Models.TagDirection">
+            <summary>
+            태그 방향
+            </summary>
+        </member>
+        <member name="T:DeviceConnector.Models.UnifiedDeviceData">
+            <summary>
+            통합 디바이스 데이터 (동적 태그 지원)
+            </summary>
+        </member>
+        <member name="P:DeviceConnector.Models.UnifiedDeviceData.TagValues">
+            <summary>태그 값 저장소</summary>
+        </member>
+        <member name="T:DeviceConnector.Mqtt.Events.MqttConnectionChangedEventArgs">
+            <summary>
+            MQTT 연결 상태 변경 이벤트
+            </summary>
+        </member>
+        <member name="T:DeviceConnector.Mqtt.Events.MqttMessagePublishedEventArgs">
+            <summary>
+            MQTT 메시지 발행 완료 이벤트
+            </summary>
+        </member>
+        <member name="T:DeviceConnector.Mqtt.Events.MqttMessageReceivedEventArgs">
+            <summary>
+            MQTT 메시지 수신 이벤트 (명령 수신용)
+            </summary>
+        </member>
+        <member name="T:DeviceConnector.Mqtt.Events.BridgeStatusChangedEventArgs">
+            <summary>
+            브릿지 상태 변경 이벤트
+            </summary>
+        </member>
+        <member name="T:DeviceConnector.Mqtt.Events.DataBridgedEventArgs">
+            <summary>
+            데이터 브릿지 완료 이벤트
+            </summary>
+        </member>
+        <member name="T:DeviceConnector.Mqtt.Interfaces.IMqttPublisherService">
+            <summary>
+            MQTT 발행 서비스 인터페이스
+            OPC UA에서 읽은 데이터를 MQTT 브로커로 발행
+            </summary>
+        </member>
+        <member name="E:DeviceConnector.Mqtt.Interfaces.IMqttPublisherService.ConnectionChanged">
+            <summary>MQTT 연결 상태 변경 이벤트</summary>
+        </member>
+        <member name="E:DeviceConnector.Mqtt.Interfaces.IMqttPublisherService.MessagePublished">
+            <summary>메시지 발행 완료 이벤트</summary>
+        </member>
+        <member name="E:DeviceConnector.Mqtt.Interfaces.IMqttPublisherService.MessageReceived">
+            <summary>메시지 수신 이벤트 (명령 수신용)</summary>
+        </member>
+        <member name="P:DeviceConnector.Mqtt.Interfaces.IMqttPublisherService.IsConnected">
+            <summary>연결 상태</summary>
+        </member>
+        <member name="P:DeviceConnector.Mqtt.Interfaces.IMqttPublisherService.ConnectionInfo">
+            <summary>MQTT 연결 설정</summary>
+        </member>
+        <member name="P:DeviceConnector.Mqtt.Interfaces.IMqttPublisherService.TopicConfig">
+            <summary>MQTT 토픽 설정</summary>
+        </member>
+        <member name="M:DeviceConnector.Mqtt.Interfaces.IMqttPublisherService.ConnectAsync">
+            <summary>MQTT 브로커에 연결</summary>
+        </member>
+        <member name="M:DeviceConnector.Mqtt.Interfaces.IMqttPublisherService.DisconnectAsync">
+            <summary>MQTT 브로커 연결 해제</summary>
+        </member>
+        <member name="M:DeviceConnector.Mqtt.Interfaces.IMqttPublisherService.PublishEsp32DataAsync(DeviceConnector.Mqtt.Models.Esp32MqttMessage)">
+            <summary>ESP32 데이터 발행</summary>
+        </member>
+        <member name="M:DeviceConnector.Mqtt.Interfaces.IMqttPublisherService.PublishConnectionStatusAsync(DeviceConnector.Mqtt.Models.ConnectionStatusMqttMessage)">
+            <summary>연결 상태 발행</summary>
+        </member>
+        <member name="M:DeviceConnector.Mqtt.Interfaces.IMqttPublisherService.PublishJsonAsync(System.String,System.Object,System.Boolean)">
+            <summary>커스텀 JSON 메시지 발행</summary>
+        </member>
+        <member name="M:DeviceConnector.Mqtt.Interfaces.IMqttPublisherService.PublishRawAsync(System.String,System.String,System.Boolean)">
+            <summary>원시 문자열 메시지 발행</summary>
+        </member>
+        <member name="M:DeviceConnector.Mqtt.Interfaces.IMqttPublisherService.SubscribeAsync(System.String)">
+            <summary>토픽 구독 (SCADA로부터 명령 수신)</summary>
+        </member>
+        <member name="M:DeviceConnector.Mqtt.Interfaces.IMqttPublisherService.UnsubscribeAsync(System.String)">
+            <summary>토픽 구독 해제</summary>
+        </member>
+        <member name="M:DeviceConnector.Mqtt.Interfaces.IMqttPublisherService.StartCommandSubscriptionAsync">
+            <summary>명령 토픽 구독 시작</summary>
+        </member>
+        <member name="T:DeviceConnector.Mqtt.Interfaces.IOpcUaMqttBridgeService">
+            <summary>
+            OPC UA → MQTT 브릿지 서비스 인터페이스
+            OPC UA에서 데이터 변경 시 자동으로 MQTT로 발행
+            </summary>
+        </member>
+        <member name="E:DeviceConnector.Mqtt.Interfaces.IOpcUaMqttBridgeService.StatusChanged">
+            <summary>브릿지 상태 변경 이벤트</summary>
+        </member>
+        <member name="E:DeviceConnector.Mqtt.Interfaces.IOpcUaMqttBridgeService.DataBridged">
+            <summary>데이터 브릿지 완료 이벤트</summary>
+        </member>
+        <member name="P:DeviceConnector.Mqtt.Interfaces.IOpcUaMqttBridgeService.IsRunning">
+            <summary>브릿지 실행 중 여부</summary>
+        </member>
+        <member name="P:DeviceConnector.Mqtt.Interfaces.IOpcUaMqttBridgeService.IsOpcUaConnected">
+            <summary>OPC UA 연결 상태</summary>
+        </member>
+        <member name="P:DeviceConnector.Mqtt.Interfaces.IOpcUaMqttBridgeService.IsMqttConnected">
+            <summary>MQTT 연결 상태</summary>
+        </member>
+        <member name="P:DeviceConnector.Mqtt.Interfaces.IOpcUaMqttBridgeService.BridgedMessageCount">
+            <summary>브릿지된 메시지 수</summary>
+        </member>
+        <member name="M:DeviceConnector.Mqtt.Interfaces.IOpcUaMqttBridgeService.StartAsync">
+            <summary>브릿지 시작 (OPC UA 연결 + MQTT 연결 + 구독 시작)</summary>
+        </member>
+        <member name="M:DeviceConnector.Mqtt.Interfaces.IOpcUaMqttBridgeService.StopAsync">
+            <summary>브릿지 중지</summary>
+        </member>
+        <member name="M:DeviceConnector.Mqtt.Interfaces.IOpcUaMqttBridgeService.PublishDataNowAsync">
+            <summary>ESP32 데이터 수동 읽기 및 발행</summary>
+        </member>
+        <member name="M:DeviceConnector.Mqtt.Interfaces.IOpcUaMqttBridgeService.EnableCommandHandlingAsync">
+            <summary>MQTT 명령 수신 처리 활성화</summary>
+        </member>
+        <member name="T:DeviceConnector.Mqtt.Models.MqttConnectionInfo">
+            <summary>
+            MQTT 브로커 연결 설정
+            </summary>
+        </member>
+        <member name="P:DeviceConnector.Mqtt.Models.MqttConnectionInfo.BrokerAddress">
+            <summary>
+            MQTT 브로커 주소 (예: "localhost", "192.168.1.100")
+            </summary>
+        </member>
+        <member name="P:DeviceConnector.Mqtt.Models.MqttConnectionInfo.Port">
+            <summary>
+            MQTT 브로커 포트 (기본값: 1883)
+            </summary>
+        </member>
+        <member name="P:DeviceConnector.Mqtt.Models.MqttConnectionInfo.ClientId">
+            <summary>
+            클라이언트 ID (고유해야 함)
+            </summary>
+        </member>
+        <member name="P:DeviceConnector.Mqtt.Models.MqttConnectionInfo.Username">
+            <summary>
+            인증 사용자명 (옵션)
+            </summary>
+        </member>
+        <member name="P:DeviceConnector.Mqtt.Models.MqttConnectionInfo.Password">
+            <summary>
+            인증 비밀번호 (옵션)
+            </summary>
+        </member>
+        <member name="P:DeviceConnector.Mqtt.Models.MqttConnectionInfo.KeepAliveSeconds">
+            <summary>
+            Keep Alive 간격 (초)
+            </summary>
+        </member>
+        <member name="P:DeviceConnector.Mqtt.Models.MqttConnectionInfo.AutoReconnect">
+            <summary>
+            자동 재연결 여부
+            </summary>
+        </member>
+        <member name="P:DeviceConnector.Mqtt.Models.MqttConnectionInfo.ReconnectDelaySeconds">
+            <summary>
+            재연결 지연 시간 (초)
+            </summary>
+        </member>
+        <member name="P:DeviceConnector.Mqtt.Models.MqttConnectionInfo.CleanSession">
+            <summary>
+            Clean Session 여부
+            </summary>
+        </member>
+        <member name="T:DeviceConnector.Mqtt.Models.MqttMessageBase">
+            <summary>
+            MQTT로 발행되는 메시지 기본 클래스
+            </summary>
+        </member>
+        <member name="P:DeviceConnector.Mqtt.Models.MqttMessageBase.Timestamp">
+            <summary>메시지 타임스탬프 (UTC)</summary>
+        </member>
+        <member name="P:DeviceConnector.Mqtt.Models.MqttMessageBase.DeviceId">
+            <summary>디바이스 ID</summary>
+        </member>
+        <member name="P:DeviceConnector.Mqtt.Models.MqttMessageBase.ChannelName">
+            <summary>채널명</summary>
+        </member>
+        <member name="P:DeviceConnector.Mqtt.Models.MqttMessageBase.DeviceName">
+            <summary>디바이스명</summary>
+        </member>
+        <member name="P:DeviceConnector.Mqtt.Models.MqttMessageBase.MessageType">
+            <summary>메시지 타입</summary>
+        </member>
+        <member name="T:DeviceConnector.Mqtt.Models.Esp32MqttMessage">
+            <summary>
+            ESP32 데이터 MQTT 메시지
+            </summary>
+        </member>
+        <member name="P:DeviceConnector.Mqtt.Models.Esp32MqttMessage.PosX">
+            <summary>X 좌표 (m)</summary>
+        </member>
+        <member name="P:DeviceConnector.Mqtt.Models.Esp32MqttMessage.PosY">
+            <summary>Y 좌표 (m)</summary>
+        </member>
+        <member name="P:DeviceConnector.Mqtt.Models.Esp32MqttMessage.PosTheta">
+            <summary>각도 Theta (rad)</summary>
+        </member>
+        <member name="P:DeviceConnector.Mqtt.Models.Esp32MqttMessage.TargetA">
+            <summary>목표 A 플래그</summary>
+        </member>
+        <member name="P:DeviceConnector.Mqtt.Models.Esp32MqttMessage.Control">
+            <summary>제어 명령</summary>
+        </member>
+        <member name="P:DeviceConnector.Mqtt.Models.Esp32MqttMessage.State">
+            <summary>상태 정보</summary>
+        </member>
+        <member name="P:DeviceConnector.Mqtt.Models.Esp32MqttMessage.IsGoodQuality">
+            <summary>OPC UA Quality 상태</summary>
+        </member>
+        <member name="M:DeviceConnector.Mqtt.Models.Esp32MqttMessage.FromEsp32Data(DeviceConnector.Models.ESP32Data)">
+            <summary>
+            ESP32Data에서 MQTT 메시지 생성
+            </summary>
+        </member>
+        <member name="T:DeviceConnector.Mqtt.Models.ConnectionStatusMqttMessage">
+            <summary>
+            연결 상태 MQTT 메시지
+            </summary>
+        </member>
+        <member name="P:DeviceConnector.Mqtt.Models.ConnectionStatusMqttMessage.IsConnected">
+            <summary>연결 상태</summary>
+        </member>
+        <member name="P:DeviceConnector.Mqtt.Models.ConnectionStatusMqttMessage.ConnectionType">
+            <summary>연결 타입 ("OPC_UA", "MQTT")</summary>
+        </member>
+        <member name="P:DeviceConnector.Mqtt.Models.ConnectionStatusMqttMessage.ServerEndpoint">
+            <summary>서버 엔드포인트</summary>
+        </member>
+        <member name="P:DeviceConnector.Mqtt.Models.ConnectionStatusMqttMessage.ErrorMessage">
+            <summary>에러 메시지</summary>
+        </member>
+        <member name="T:DeviceConnector.Mqtt.Models.CommandMqttMessage">
+            <summary>
+            명령 MQTT 메시지 (SCADA → 장비)
+            </summary>
+        </member>
+        <member name="P:DeviceConnector.Mqtt.Models.CommandMqttMessage.CommandType">
+            <summary>명령 타입 ("WRITE_TAG", "READ_TAG")</summary>
+        </member>
+        <member name="P:DeviceConnector.Mqtt.Models.CommandMqttMessage.TagName">
+            <summary>태그 이름</summary>
+        </member>
+        <member name="P:DeviceConnector.Mqtt.Models.CommandMqttMessage.Value">
+            <summary>값</summary>
+        </member>
+        <member name="T:DeviceConnector.Mqtt.Models.MqttTopicConfig">
+            <summary>
+            MQTT 토픽 설정
+            </summary>
+        </member>
+        <member name="P:DeviceConnector.Mqtt.Models.MqttTopicConfig.BaseTopic">
+            <summary>
+            기본 토픽 접두사 (예: "factory/line1")
+            </summary>
+        </member>
+        <member name="P:DeviceConnector.Mqtt.Models.MqttTopicConfig.Esp32DataTopic">
+            <summary>
+            ESP32 데이터 토픽
+            </summary>
+        </member>
+        <member name="P:DeviceConnector.Mqtt.Models.MqttTopicConfig.StatusTopic">
+            <summary>
+            상태 토픽 (연결 상태 등)
+            </summary>
+        </member>
+        <member name="P:DeviceConnector.Mqtt.Models.MqttTopicConfig.CommandTopic">
+            <summary>
+            명령 수신 토픽 (SCADA → 장비)
+            </summary>
+        </member>
+        <member name="M:DeviceConnector.Mqtt.Models.MqttTopicConfig.GetDeviceDataTopic(System.String)">
+            <summary>
+            디바이스별 데이터 토픽 생성
+            </summary>
+        </member>
+        <member name="M:DeviceConnector.Mqtt.Models.MqttTopicConfig.GetDeviceStatusTopic(System.String)">
+            <summary>
+            디바이스별 상태 토픽 생성
+            </summary>
+        </member>
+        <member name="T:DeviceConnector.Mqtt.Models.UnifiedMqttMessage">
+            <summary>
+            통합 MQTT 메시지
+            모든 디바이스 타입을 위한 범용 메시지 포맷
+            </summary>
+        </member>
+        <member name="M:DeviceConnector.Mqtt.Models.UnifiedMqttMessage.FromDeviceData(DeviceConnector.Models.UnifiedDeviceData)">
+            <summary>
+            UnifiedDeviceData에서 메시지 생성
+            </summary>
+        </member>
+        <member name="M:DeviceConnector.Mqtt.Models.UnifiedMqttMessage.ToJson">
+            <summary>
+            JSON 직렬화
+            </summary>
+        </member>
+        <member name="M:DeviceConnector.Mqtt.Models.UnifiedMqttMessage.FromJson(System.String)">
+            <summary>
+            JSON 역직렬화
+            </summary>
+        </member>
+        <member name="T:DeviceConnector.Mqtt.Models.MqttCommandMessage">
+            <summary>
+            MQTT 제어 명령 메시지
+            Node-RED 등에서 전송하는 제어 명령
+            </summary>
+        </member>
+        <member name="M:DeviceConnector.Mqtt.Models.MqttCommandMessage.ToJson">
+            <summary>
+            JSON 직렬화
+            </summary>
+        </member>
+        <member name="M:DeviceConnector.Mqtt.Models.MqttCommandMessage.FromJson(System.String)">
+            <summary>
+            JSON 역직렬화
+            </summary>
+        </member>
+        <member name="T:DeviceConnector.Mqtt.Models.MqttCommandResponse">
+            <summary>
+            MQTT 명령 응답 메시지
+            </summary>
+        </member>
+        <member name="M:DeviceConnector.Mqtt.Models.MqttCommandResponse.ToJson">
+            <summary>
+            JSON 직렬화
+            </summary>
+        </member>
+        <member name="T:DeviceConnector.Mqtt.Models.UnifiedMqttTopicConfig">
+            <summary>
+            MQTT 토픽 설정 (확장)
+            </summary>
+        </member>
+        <member name="P:DeviceConnector.Mqtt.Models.UnifiedMqttTopicConfig.BaseTopic">
+            <summary>기본 토픽 (예: "factory/line1")</summary>
+        </member>
+        <member name="M:DeviceConnector.Mqtt.Models.UnifiedMqttTopicConfig.GetDataTopic(System.String,System.String)">
+            <summary>
+            디바이스 데이터 토픽 생성
+            예: factory/line1/simulator/SimDevice01/data
+            </summary>
+        </member>
+        <member name="M:DeviceConnector.Mqtt.Models.UnifiedMqttTopicConfig.GetCommandTopic(System.String,System.String)">
+            <summary>
+            디바이스 명령 토픽 생성
+            예: factory/line1/simulator/SimDevice01/command
+            </summary>
+        </member>
+        <member name="M:DeviceConnector.Mqtt.Models.UnifiedMqttTopicConfig.GetResponseTopic(System.String,System.String)">
+            <summary>
+            디바이스 응답 토픽 생성
+            예: factory/line1/simulator/SimDevice01/response
+            </summary>
+        </member>
+        <member name="P:DeviceConnector.Mqtt.Models.UnifiedMqttTopicConfig.StatusTopic">
+            <summary>
+            상태 토픽
+            </summary>
+        </member>
+        <member name="P:DeviceConnector.Mqtt.Models.UnifiedMqttTopicConfig.AllCommandsTopic">
+            <summary>
+            전체 명령 구독 토픽 (와일드카드)
+            </summary>
+        </member>
+        <member name="T:DeviceConnector.Mqtt.Services.MqttPublisherService">
+            <summary>
+            MQTT 발행 서비스 구현
+            MQTTnet 라이브러리 사용
+            </summary>
+        </member>
+        <member name="T:DeviceConnector.Mqtt.Services.OpcUaMqttBridgeService">
+            <summary>
+            OPC UA → MQTT 브릿지 서비스 구현
+            OPC UA 구독 데이터를 실시간으로 MQTT로 발행
+            </summary>
+        </member>
+        <member name="M:DeviceConnector.Mqtt.Services.OpcUaMqttBridgeService.#ctor(DeviceConnector.Interfaces.IOpcUaClientService,DeviceConnector.Mqtt.Interfaces.IMqttPublisherService)">
+            <summary>
+            브릿지 서비스 생성자
+            </summary>
+        </member>
+        <member name="T:DeviceConnector.Mqtt.Services.UnifiedOpcUaMqttBridgeService">
+            <summary>
+            통합 OPC UA-MQTT 브릿지 서비스
+            여러 디바이스 타입을 MQTT로 발행하고 제어 명령 수신
+            
+            ┌─────────────────────────────────────────────────────────────────────┐
+            │ 데이터 흐름                                                         │
+            │                                                                     │
+            │ [Monitoring]                                                        │
+            │ OPC UA → Bridge → MQTT (factory/line1/{type}/{id}/data)            │
+            │                                                                     │
+            │ [Control - SCADA]                                                   │
+            │ MQTT (factory/line1/{type}/{id}/command) → Bridge → OPC UA         │
+            │                                                                     │
+            │ [Response]                                                          │
+            │ OPC UA → Bridge → MQTT (factory/line1/{type}/{id}/response)        │
+            └─────────────────────────────────────────────────────────────────────┘
+            </summary>
+        </member>
+        <member name="M:DeviceConnector.Mqtt.Services.UnifiedOpcUaMqttBridgeService.StartAsync(System.Threading.CancellationToken)">
+            <summary>
+            브릿지 시작
+            </summary>
+        </member>
+        <member name="M:DeviceConnector.Mqtt.Services.UnifiedOpcUaMqttBridgeService.StopAsync">
+            <summary>
+            브릿지 중지
+            </summary>
+        </member>
+        <member name="M:DeviceConnector.Mqtt.Services.UnifiedOpcUaMqttBridgeService.PublishDeviceDataAsync(DeviceConnector.Models.UnifiedDeviceData,MQTTnet.Protocol.MqttQualityOfServiceLevel)">
+            <summary>
+            디바이스 데이터 MQTT 발행
+            </summary>
+        </member>
+        <member name="M:DeviceConnector.Mqtt.Services.UnifiedOpcUaMqttBridgeService.PublishAllDataNowAsync">
+            <summary>
+            모든 디바이스 데이터 즉시 발행
+            </summary>
+        </member>
+        <member name="M:DeviceConnector.Mqtt.Services.UnifiedOpcUaMqttBridgeService.PublishStatusAsync(System.Boolean)">
+            <summary>
+            상태 발행
+            </summary>
+        </member>
+        <member name="M:DeviceConnector.Mqtt.Services.UnifiedOpcUaMqttBridgeService.SendCommandAsync(System.String,System.String,System.Object)">
+            <summary>
+            수동으로 명령 전송 (테스트용)
+            </summary>
+        </member>
+        <member name="T:DeviceConnector.Services.DeviceConfigFactory">
+            <summary>
+            디바이스 설정 팩토리
+            KEPServerEX 채널별 디바이스 설정 생성
+            </summary>
+        </member>
+        <member name="M:DeviceConnector.Services.DeviceConfigFactory.CreateSimulatorConfig(System.String,System.String,System.String)">
+            <summary>
+            MqttTest 채널 - SimDevice01 설정 생성
+            KEPServerEX 8-Bit Simulator 디바이스
+            </summary>
+        </member>
+        <member name="M:DeviceConnector.Services.DeviceConfigFactory.CreateSTMYoloConfig(System.String,System.String,System.String)">
+            <summary>
+            STM 채널 - Stm_yolo 설정 생성
+            STM Yolo 컨베이어 제어 디바이스
+            </summary>
+        </member>
+        <member name="M:DeviceConnector.Services.DeviceConfigFactory.CreateESP32Config(System.String,System.String,System.String)">
+            <summary>
+            ESP32 ModbusTCP 설정 생성
+            </summary>
+        </member>
+        <member name="M:DeviceConnector.Services.DeviceConfigFactory.CreateAllConfigs">
+            <summary>
+            모든 디바이스 설정 생성
+            </summary>
+        </member>
+        <member name="M:DeviceConnector.Services.DeviceConfigFactory.CreateTestConfigs">
+            <summary>
+            테스트용 설정 생성 (Simulator만)
+            </summary>
+        </member>
+        <member name="T:DeviceConnector.Services.ProcessManager">
+            <summary>
+            외부 프로세스(Grafana, Node-RED, InfluxDB, Mosquitto) 자동 실행 및 관리
+            v3.5: Grafana 자동 시작 기능 추가
+            </summary>
+        </member>
+        <member name="M:DeviceConnector.Services.ProcessManager.#ctor">
+            <summary>
+            기본 경로로 ProcessManager 생성
+            </summary>
+        </member>
+        <member name="M:DeviceConnector.Services.ProcessManager.#ctor(System.String,System.String,System.String)">
+            <summary>
+            사용자 지정 경로로 ProcessManager 생성
+            </summary>
+        </member>
+        <member name="M:DeviceConnector.Services.ProcessManager.StartAllServicesAsync">
+            <summary>
+            모든 서비스 시작
+            </summary>
+        </member>
+        <member name="M:DeviceConnector.Services.ProcessManager.StartMosquittoAsync">
+            <summary>
+            Mosquitto MQTT Broker 시작
+            </summary>
+        </member>
+        <member name="M:DeviceConnector.Services.ProcessManager.StartInfluxDbAsync">
+            <summary>
+            InfluxDB 시작
+            </summary>
+        </member>
+        <member name="M:DeviceConnector.Services.ProcessManager.StartGrafanaAsync">
+            <summary>
+            Grafana 시작
+            </summary>
+        </member>
+        <member name="M:DeviceConnector.Services.ProcessManager.StartNodeRedAsync">
+            <summary>
+            Node-RED 시작
+            </summary>
+        </member>
+        <member name="M:DeviceConnector.Services.ProcessManager.IsProcessRunning(System.String)">
+            <summary>
+            특정 프로세스가 실행 중인지 확인
+            </summary>
+        </member>
+        <member name="M:DeviceConnector.Services.ProcessManager.PrintStatus">
+            <summary>
+            모든 서비스 상태 출력
+            </summary>
+        </member>
+        <member name="M:DeviceConnector.Services.ProcessManager.StopManagedServices">
+            <summary>
+            관리 중인 프로세스 중지
+            </summary>
+        </member>
+        <member name="M:DeviceConnector.Services.ProcessManager.KillAllRelatedProcesses">
+            <summary>
+            시스템에서 실행 중인 모든 관련 프로세스 강제 종료
+            </summary>
+        </member>
+        <member name="M:DeviceConnector.Services.ProcessManager.OpenDashboards">
+            <summary>
+            브라우저에서 대시보드 열기
+            </summary>
+        </member>
+        <member name="T:DeviceConnector.Services.UnifiedOpcUaClientService">
+            <summary>
+            통합 OPC UA 클라이언트 서비스
+            ESP32, STMYolo, Simulator 등 여러 디바이스 타입 지원
+            
+            ┌─────────────────────────────────────────────────────────────────────┐
+            │ v3.0 변경사항                                                       │
+            │ - 다중 디바이스 타입 지원 (ESP32, STMYolo, Simulator)               │
+            │ - UnifiedDeviceConfig 기반 동적 태그 관리                           │
+            │ - 태그 그룹 지원 (Simulator용)                                      │
+            └─────────────────────────────────────────────────────────────────────┘
+            </summary>
+        </member>
+        <member name="M:DeviceConnector.Services.UnifiedOpcUaClientService.AddDeviceConfig(DeviceConnector.Models.UnifiedDeviceConfig)">
+            <summary>
+            디바이스 설정 추가
+            </summary>
+        </member>
+        <member name="M:DeviceConnector.Services.UnifiedOpcUaClientService.AddDeviceConfigs(System.Collections.Generic.IEnumerable{DeviceConnector.Models.UnifiedDeviceConfig})">
+            <summary>
+            여러 디바이스 설정 추가
+            </summary>
+        </member>
+        <member name="M:DeviceConnector.Services.UnifiedOpcUaClientService.RemoveDeviceConfig(System.String)">
+            <summary>
+            디바이스 설정 제거
+            </summary>
+        </member>
+        <member name="M:DeviceConnector.Services.UnifiedOpcUaClientService.ReadDeviceDataAsync(System.String)">
+            <summary>
+            디바이스 데이터 읽기
+            </summary>
+        </member>
+        <member name="M:DeviceConnector.Services.UnifiedOpcUaClientService.ReadAllDeviceDataAsync">
+            <summary>
+            모든 디바이스 데이터 읽기
+            </summary>
+        </member>
+        <member name="M:DeviceConnector.Services.UnifiedOpcUaClientService.WriteTagAsync(System.String,System.String,System.Object)">
+            <summary>
+            태그 값 쓰기
+            </summary>
+        </member>
+        <member name="M:DeviceConnector.Services.UnifiedOpcUaClientService.WriteTagsAsync(System.String,System.Collections.Generic.Dictionary{System.String,System.Object})">
+            <summary>
+            여러 태그 값 쓰기
+            </summary>
+        </member>
+        <member name="M:DeviceConnector.Services.UnifiedOpcUaClientService.StartSubscriptionAsync(System.String,System.Threading.CancellationToken)">
+            <summary>
+            디바이스 구독 시작
+            </summary>
+        </member>
+        <member name="M:DeviceConnector.Services.UnifiedOpcUaClientService.StopSubscriptionAsync(System.String)">
+            <summary>
+            디바이스 구독 중지
+            </summary>
+        </member>
+        <member name="M:DeviceConnector.Services.UnifiedOpcUaClientService.StartAllSubscriptionsAsync(System.Threading.CancellationToken)">
+            <summary>
+            모든 디바이스 구독 시작
+            </summary>
+        </member>
+        <member name="M:DeviceConnector.Services.UnifiedOpcUaClientService.StopAllSubscriptionsAsync">
+            <summary>
+            모든 디바이스 구독 중지
+            </summary>
+        </member>
+        <member name="M:DeviceConnector.Services.UnifiedOpcUaClientService.GetCachedData(System.String)">
+            <summary>
+            캐시된 디바이스 데이터 조회
+            </summary>
+        </member>
+        <member name="M:DeviceConnector.Services.UnifiedOpcUaClientService.GetAllCachedData">
+            <summary>
+            모든 캐시된 데이터 조회
+            </summary>
+        </member>
+        <member name="T:DeviceConnector.Services.UnifiedDataChangedEventArgs">
+            <summary>
+            통합 데이터 변경 이벤트
+            </summary>
+        </member>
+    </members>
+</doc>
