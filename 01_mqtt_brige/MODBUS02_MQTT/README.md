@@ -240,6 +240,3 @@ mosquitto_pub -h localhost -t "factory/line1/esp32/ESP32_01/data" -m '{"deviceId
 2. **Mosquitto 설치 필요**: MQTT 브로커가 먼저 실행 중이어야 합니다.
 3. **KEPServerEX 실행 필요**: OPC UA 서버가 먼저 실행 중이어야 합니다.
 
-## 📞 문의
-
-KEPServerEX 또는 OPC UA 연결 문제는 기존 MODBUS02_CODE 문서를 참조하세요.
